@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Background Color and Gradient Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px 0;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .color-input-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 20px 0;
+        }
+
+        #color-input,
+        #gradient-input {
+            width: 48%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #generate-random-color {
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        #color-box {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.5s;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Background Color and Gradient Generator</h1>
+    </header>
+    <div class="container">
+        <div class="color-input-container">
+            <input type="color" id="color-input" value="#FFFFFF">
+            <input type="color" id="gradient-input" value="#FFFFFF">
+        </div>
+        <button id="generate-random-color">Generate Random Color</button>
+        <div id="color-box">
+            <p>Click the color inputs above to select a background color.</p>
+        </div>
+    </div>
+
+    <script>
+        const colorInput = document.getElementById('color-input');
+        const gradientInput = document.getElementById('gradient-input');
+        const colorBox = document.getElementById('color-box');
+        const generateRandomColorButton = document.getElementById('generate-random-color');
+
+        function updateBackground() {
+            const selectedColor = colorInput.value;
+            const selectedGradientColor = gradientInput.value;
+            colorBox.style.background = `linear-gradient(${selectedColor}, ${selectedGradientColor})`;
+        }
+
+        function generateRandomColor() {
+            const randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16); 
+            colorInput.value = randomColor;
+            updateBackground();
+        }
+
+        colorInput.addEventListener('input', updateBackground);
+        gradientInput.addEventListener('input', updateBackground);
+        generateRandomColorButton.addEventListener('click', generateRandomColor);
+
+        updateBackground();
+    </script>
+</body>
+</html>
